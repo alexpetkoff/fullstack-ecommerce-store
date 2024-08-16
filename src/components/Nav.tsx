@@ -10,5 +10,11 @@ export function Nav({ children }: { children: React.ReactNode }) {
 
 export function NavLink(props: Omit<ComponentProps<typeof Link>, "className">) {
     const pathname = usePathname();
-    return <Link {...props} className={`text-white hover:text-slate-800 hover:bg-white px-4 py-4 ${pathname === props.href && "bg-white !text-slate-800"}`} />;
+    return (
+        <Link
+            {...props}
+            className={`text-white hover:text-slate-800 hover:bg-white px-4 py-4
+            ${pathname === props.href && "bg-white !text-slate-800"}`}
+        />
+    );
 }
