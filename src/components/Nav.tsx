@@ -1,8 +1,8 @@
 "use client";
 
 import { ComponentProps } from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export function Nav({ children }: { children: React.ReactNode }) {
     return <nav className="text-[18px] bg-slate-800 flex flex-row justify-center">{children}</nav>;
