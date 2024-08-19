@@ -6,7 +6,7 @@ const exo2 = Exo_2({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
     title: "Ecommerce Store",
-    description: "Greated for exercise purposes - NextJS, TailwindCSS, Stripe, Prisma, and more!",
+    description: "Created for exercise purposes - NextJS, TailwindCSS, Stripe, Prisma, and more!",
 };
 
 export default function RootLayout({

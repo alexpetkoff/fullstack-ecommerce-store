@@ -1,5 +1,6 @@
 import prisma from "@/db/db";
 import Card from "@/components/Card";
+import { formatCurrency, formatNumber } from "@/lib/formatters";
 
 async function getSalesData() {
     const data = await prisma?.order.aggregate({
@@ -13,6 +14,8 @@ async function getSalesData() {
     };
 }
 
+async function getUserData() {}
+
 export default async function AdminDashboard() {
     const salesData = await getSalesData();
 
@@ -20,8 +23,8 @@ export default async function AdminDashboard() {
         <div className="m-10">
             <h1 className="text-3xl font-bold text-center">Admin Dashboard</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-6 px-10 gap-4">
-                <Card title="Sales" subtitle={salesData?.numberOfSales + " Orders"} body={salesData?.amount + "$"} />
-                <Card title="Customers" subtitle={"100$ Average value"} body="1" />
+                <Card title="Sales" subtitle={formatNumber(salesData?.numberOfSales) + " Orders"} body={formatCurrency(salesData?.amount)} />
+                <Card title="Customers" subtitle="100$ Average value" body="1" />
                 <Card title="Active products" subtitle="1 inactive" body="7" />
             </div>
         </div>
