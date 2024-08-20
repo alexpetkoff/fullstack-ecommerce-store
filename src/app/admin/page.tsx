@@ -1,6 +1,7 @@
 import prisma from "@/db/db";
 import Card from "@/components/Card";
 import { formatCurrency, formatNumber } from "@/lib/formatters";
+import { PageHeading } from "@/components/PageHeading";
 
 function wait(time: number) {
     return new Promise((resolve) => setTimeout(resolve, time));
@@ -55,7 +56,7 @@ export default async function AdminDashboard() {
 
     return (
         <div className="m-10">
-            <h1 className="text-3xl font-bold text-center">Admin Dashboard</h1>
+            <PageHeading>Admin Dashboard</PageHeading>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-6 px-10 gap-4">
                 <Card title="Sales" subtitle={formatNumber(salesData?.numberOfSales) + " Orders"} body={formatCurrency(salesData?.amount)} />
                 <Card title="Customers" subtitle={`${formatCurrency(usersData.averageValuePerUser)} Average value`} body={formatNumber(usersData.userCount)} />
