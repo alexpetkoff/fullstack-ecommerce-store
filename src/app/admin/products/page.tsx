@@ -1,6 +1,7 @@
 import { PageHeading } from "@/components/PageHeading";
 import { Button } from "@/components/DefaultButton";
 import { formatCurrency } from "@/lib/formatters";
+import Image from "next/image";
 
 export default function ProductsPage() {
     return (
@@ -20,6 +21,7 @@ async function ProductsTable() {
             priceInCents: true,
             isAvailableForPurchase: true,
             _count: { select: { orders: true } },
+            imagePath: true,
         },
         orderBy: { name: "asc" },
     });
@@ -45,6 +47,9 @@ async function ProductsTable() {
                 {products?.map((product) => (
                     <tr key={product.id}>
                         <td className="border-[1px] border-zinc-200 p-2">{product.isAvailableForPurchase ? <AvailableIcon /> : "No"}</td>
+                        <td className="border-[1px] border-zinc-200 p-2 w-[50px]">
+                            <Image style={{ objectFit: "contain", borderRadius: "5px" }} src={product?.imagePath} alt={product.name} width={50} height={50} />
+                        </td>
                         <td className="border-[1px] border-zinc-200 p-2">{product.name}</td>
                         <td className="border-[1px] border-zinc-200 p-2">{formatCurrency(product.priceInCents / 100)}</td>
                         <td className="border-[1px] border-zinc-200 p-2">{product._count.orders}</td>
