@@ -3,16 +3,18 @@
 import { formatCurrency } from "@/lib/formatters";
 import { useState } from "react";
 import { addProduct } from "../../_actions/products";
-import { useFormStatus } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
 
 export function ProductForm() {
+    const [error, action] = useFormState(addProduct, {});
     const [priceInCents, setPriceInCents] = useState<number>();
 
     return (
-        <form action={addProduct} className="w-1/2 text-center flex flex-col items-center gap-4">
+        <form action={action} className="w-1/2 text-center flex flex-col items-center gap-4">
             <div className="flex flex-col items-center">
                 <label htmlFor="name">Name</label>
                 <input type="text" name="name" id="name" className="border-zinc-200 p-1 border-[1px]" required />
+                {error.name && <div className="text-rose-700">{error.name}</div>}
             </div>
             <div className="flex flex-col items-center">
                 <label htmlFor="priceInCents">Price in cents</label>
@@ -27,18 +29,22 @@ export function ProductForm() {
                     onChange={(e) => setPriceInCents(Number(e.target.value))}
                 />
                 <div className="text-muted-foreground">{formatCurrency((priceInCents || 0) / 100)}</div>
+                {error.priceInCents && <div className="text-rose-700">{error.priceInCents}</div>}
             </div>
             <div className="flex flex-col items-center">
                 <label htmlFor="description">Description</label>
                 <textarea rows={5} placeholder=" " name="description" id="description" className="border-zinc-200 p-1 border-[1px]" required />
+                {error.description && <div className="text-rose-700">{error.description}</div>}
             </div>
             <div className="flex flex-col items-center">
                 <label htmlFor="file">File</label>
                 <input type="file" name="file" id="file" className="border-zinc-200 p-1 border-[1px]" required />
+                {error.file && <div className="text-rose-700">{error.file}</div>}
             </div>
             <div className="flex flex-col items-center">
                 <label htmlFor="image">Image</label>
                 <input type="file" name="image" id="image" className="border-zinc-200 p-1 border-[1px]" required />
+                {error.image && <div className="text-rose-700">{error.image}</div>}
             </div>
             <SubmitButton />
         </form>
