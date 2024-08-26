@@ -77,7 +77,7 @@ export async function updateProduct(id: string, prevState: unknown, formData: Fo
 
     if (data.image != null && data.image.size > 0) {
         await fs.unlink(`public${product.imagePath}`);
-        imagePath = `products/${crypto.randomUUID()}-${data.image.name}`;
+        imagePath = `/products/${crypto.randomUUID()}-${data.image.name}`;
         await fs.writeFile(`public${imagePath}`, Buffer.from(await data.image.arrayBuffer()));
     }
 
