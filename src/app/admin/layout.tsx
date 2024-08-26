@@ -1,6 +1,12 @@
 import { Nav, NavLink } from "@/components/Nav";
+import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+    title: "Ecommerce Store - Admin panel",
+    description: "Created for exercise purposes - NextJS, TailwindCSS, Stripe, Prisma, and more!",
+};
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
     return (

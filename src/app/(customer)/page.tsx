@@ -1,7 +1,15 @@
 import { Button } from "@/components/DefaultButton";
 import { ProductCard } from "@/components/ProductCard";
 import prisma from "@/db/db";
-import Link from "next/link";
+
+export default function HomePage() {
+    return (
+        <main className="space-y-12">
+            <ProductGridSection title="Most Popular" productsFetcher={getMostPopular} />
+            <ProductGridSection title="Newest" productsFetcher={getNewestProducts} />
+        </main>
+    );
+}
 
 function getMostPopular() {
     return prisma?.product.findMany({
@@ -22,14 +30,13 @@ function getNewestProducts() {
     });
 }
 
-export default function HomePage() {
-    return (
-        <main className="space-y-12">
-            <ProductGridSection title="Most Popular" productsFetcher={getMostPopular} />
-            <ProductGridSection title="Newest" productsFetcher={getNewestProducts} />
-        </main>
-    );
-}
+type Product = {
+    id: string;
+    name: string;
+    priceInCents: number;
+    imagePath: string;
+    description: string;
+};
 
 type ProductGridSectionProps = {
     title: string;
