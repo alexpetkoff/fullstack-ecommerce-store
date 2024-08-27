@@ -1,5 +1,4 @@
 import { formatCurrency } from "@/lib/formatters";
-import Link from "next/link";
 import { Button } from "./DefaultButton";
 import Image from "next/image";
 
